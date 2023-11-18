@@ -39,7 +39,7 @@ from dj_rest_auth.serializers import TokenSerializer
 
 class UserTokenSerializer(TokenSerializer):
 
-    user = UserSerializer()
+    token = serializers.CharField(source='key')
     
     class Meta(TokenSerializer.Meta):
-        fields = ('token', 'user')    
+        fields = ('token', 'user')     

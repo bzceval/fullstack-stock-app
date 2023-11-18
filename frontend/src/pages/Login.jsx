@@ -4,6 +4,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { Formik, Form } from "formik";
 import { useSelector } from "react-redux";
 import * as yup from "yup";
+import useAuthCalls from "../hooks/useAuthCalls";
 
 const loginSchema = yup.object({
   email: yup
@@ -22,6 +23,7 @@ const loginSchema = yup.object({
 
 const Login = () => {
   const { currentUser, error, loading } = useSelector((state) => state.auth);
+  const { loginSuccess } = useAuthCalls();
   const styles = useMemo(
     () => ({
       imageSide: {
@@ -55,6 +57,7 @@ const Login = () => {
             validationSchema={loginSchema}
             onSubmit={(values, actions) => {
               // 1. login request
+              loginSuccess(values);
               // 2. in form reset
               actions.resetForm();
               // 3. if form submit, formik set auto true, this state fix
