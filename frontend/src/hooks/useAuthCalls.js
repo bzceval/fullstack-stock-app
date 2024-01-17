@@ -30,7 +30,7 @@ const useAuthCalls = () => {
   const logoutSuccess = async () => {
     dispatch(FETCH_START());
     try {
-      await axios.post(`${BASE_URL}account/auth/logout/`)
+      await axios.post(`${BASE_URL}/account/auth/logout/`)
       dispatch(LOGOUT_SUCCESS());
       navigate("/");
     } catch (error) {
