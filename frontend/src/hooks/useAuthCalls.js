@@ -2,6 +2,7 @@ import {
   FETCH_FAIL,
   FETCH_START,
   LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
 } from "../redux/features/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -13,20 +14,31 @@ const useAuthCalls = () => {
   const BASE_URL = "http://127.0.0.1:8000";
 
   const loginSuccess = async (userInfo) => {
-    dispatch(FETCH_START);
+    dispatch(FETCH_START());
     try {
       const { data } = await axios.post(
         `${BASE_URL}/account/auth/login/`,
         userInfo
       );
       dispatch(LOGIN_SUCCESS(data));
-      navigate("/stock");
+      navigate("/stock/");
     } catch (error) {
       dispatch(FETCH_FAIL(error));
     }
   };
 
-  return { loginSuccess };
+  const logoutSuccess = async () => {
+    dispatch(FETCH_START());
+    try {
+      await axios.post(`${BASE_URL}account/auth/logout/`)
+      dispatch(LOGOUT_SUCCESS());
+      navigate("/");
+    } catch (error) {
+      dispatch(FETCH_FAIL(error));
+    }
+  };
+
+  return { loginSuccess, logoutSuccess };
 };
 
 export default useAuthCalls;
