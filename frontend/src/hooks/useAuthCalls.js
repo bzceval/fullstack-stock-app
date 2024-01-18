@@ -16,7 +16,7 @@ const useAuthCalls = () => {
   const loginSuccess = async (userInfo) => {
     dispatch(FETCH_START());
     try {
-      const { data } = await axios.post(`account/auth/login/`, userInfo);
+      const { data } = await axiosPublic.post(`account/auth/login/`, userInfo);
       dispatch(LOGIN_SUCCESS(data));
       navigate("/stock/");
     } catch (error) {
