@@ -1,29 +1,13 @@
 import React, { useMemo } from "react";
-import { TextField, Paper, Box, Grid, Typography } from "@mui/material";
-import LoadingButton from "@mui/lab/LoadingButton";
-import { Formik, Form } from "formik";
-import { useSelector } from "react-redux";
-import * as yup from "yup";
+import { Paper, Box, Grid, Typography } from "@mui/material";
+import { Formik } from "formik";
 import useAuthCalls from "../hooks/useAuthCalls";
-
-const loginSchema = yup.object({
-  email: yup
-    .string()
-    .email("Please enter valid email!")
-    .required("Please enter your email!"),
-  password: yup
-    .string()
-    .required("Please enter your password")
-    .min(8, "Password must have min 8 chars")
-    .max(16, "Password too longer")
-    .matches(/\d+/, "Password must have number")
-    .matches(/[a-z]+/, "Password must have lowercase")
-    .matches(/[A-Z]+/, "Password must have uppercase"),
-});
+import LoginForm, { loginSchema } from "../components/LoginForm";
+import { useSelector } from "react-redux";
 
 const Login = () => {
-  const { currentUser, error, loading } = useSelector((state) => state.auth);
   const { loginSuccess } = useAuthCalls();
+  const { currentUser, error } = useSelector((state) => state.auth);
   const styles = useMemo(
     () => ({
       imageSide: {
@@ -63,57 +47,8 @@ const Login = () => {
               // 3. if form submit, formik set auto true, this state fix
               actions.setSubmitting(false);
             }}
-          >
-            {({
-              values,
-              isSubmitting,
-              handleChange,
-              handleBlur,
-              touched,
-              errors,
-            }) => (
-              <Form style={{ width: "100%" }}>
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  helperText={touched.email && errors.email}
-                  error={touched.email && Boolean(errors.email)}
-                />
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  helperText={touched.password && errors.password}
-                  error={touched.password && Boolean(errors.password)}
-                />
-                <LoadingButton
-                  loading={loading}
-                  loadingPosition="center"
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign In
-                </LoadingButton>
-              </Form>
-            )}
-          </Formik>
+            component={(props) => <LoginForm {...props} />}
+          ></Formik>
         </Box>
       </Grid>
     </Grid>
