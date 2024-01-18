@@ -3,11 +3,10 @@ import { Paper, Box, Grid, Typography } from "@mui/material";
 import { Formik } from "formik";
 import useAuthCalls from "../hooks/useAuthCalls";
 import LoginForm, { loginSchema } from "../components/LoginForm";
-import { useSelector } from "react-redux";
 
 const Login = () => {
   const { loginSuccess } = useAuthCalls();
-  const { currentUser, error } = useSelector((state) => state.auth);
+  // const { currentUser, error } = useSelector((state) => state.auth);
   const styles = useMemo(
     () => ({
       imageSide: {
