@@ -27,10 +27,22 @@ const useAuthCalls = () => {
     }
   };
 
+  const registerSuccess = async (userInfo) => {
+    dispatch(FETCH_START());
+    try {
+      const { data } = await axiosPublic.post("account/register/", userInfo);
+      dispatch(registerSuccess(data));
+      toastSuccessNotify("Register performed");
+      navigate("/stock");
+    } catch (err) {
+      dispatch(FETCH_FAIL());
+    }
+  };
+
   const logoutSuccess = async () => {
     dispatch(FETCH_START());
     try {
-      await axios.post(`${BASE_URL}/account/auth/logout/`)
+      await axios.post(`${BASE_URL}/account/auth/logout/`);
       dispatch(LOGOUT_SUCCESS());
       navigate("/");
     } catch (error) {
@@ -38,7 +50,7 @@ const useAuthCalls = () => {
     }
   };
 
-  return { loginSuccess, logoutSuccess };
+  return { loginSuccess, logoutSuccess, registerSuccess };
 };
 
 export default useAuthCalls;
