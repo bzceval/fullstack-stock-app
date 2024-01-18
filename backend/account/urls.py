@@ -1,14 +1,16 @@
 from django.urls import path, include
 
-# '/account/':
+# after '/user/' ->
 urlpatterns = [
     path('auth/', include('dj_rest_auth.urls'))
-]
+] 
 
-# ---------- Router ----------
+# -------------------------------
+# Routers
+# -------------------------------
 from rest_framework.routers import DefaultRouter
-from .views import UserCreateView, UserView
-router = DefaultRouter()
-router.register('register', UserCreateView) # permissions.AllowAny
-router.register('', UserView) # permissions.IsAdminUser
+from .views import UserView, UserCreateView
+router = DefaultRouter() 
+router.register('register', UserCreateView) # AllowAny
+router.register('', UserView) # OnlyStaff
 urlpatterns += router.urls
