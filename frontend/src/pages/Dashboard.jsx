@@ -21,7 +21,7 @@ const drawerWidth = 200;
 
 const Dashboard = (props) => {
   const { currentUser } = useSelector((state) => state.auth);
-  const { logout } = useAuthCalls();
+  const { logoutSuccess } = useAuthCalls();
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -64,7 +64,7 @@ const Dashboard = (props) => {
             Stock App
           </Typography>
           {currentUser && (
-            <Button color="inherit" onClick={() => logout()}>
+            <Button color="inherit" onClick={() => logoutSuccess()}>
               Logout
             </Button>
           )}
