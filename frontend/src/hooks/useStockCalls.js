@@ -6,9 +6,8 @@ import {
   getSuccess,
   getProCatBrandsSuccess,
   getAllStockSuccess,
-} from "../features/stockSlice";
+} from "../redux/features/stockSlice";
 import useAxios from "./useAxios";
-import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
 
 const useStockCalls = () => {
   const dispatch = useDispatch();
@@ -82,11 +81,9 @@ const useStockCalls = () => {
   const deleteStockData = async (url, id) => {
     try {
       await axiosWithToken.delete(`stock/${url}/${id}/`);
-      toastSuccessNotify(`${url} successfuly deleted`);
       getStockData(url);
     } catch (error) {
       console.log(error);
-      toastErrorNotify(`${url} can not be deleted`);
     }
   };
 
@@ -100,11 +97,9 @@ const useStockCalls = () => {
   const postStockData = async (info, url) => {
     try {
       await axiosWithToken.post(`stock/${url}/`, info);
-      toastSuccessNotify(`${url} successfuly added`);
       getStockData(url);
     } catch (error) {
       console.log(error);
-      toastErrorNotify(`${url} can not be added`);
     }
   };
 
@@ -118,11 +113,9 @@ const useStockCalls = () => {
   const putStockData = async (info, url) => {
     try {
       await axiosWithToken.put(`stock/${url}/${info.id}/`, info);
-      toastSuccessNotify(`${url} successfuly updated`);
       getStockData(url);
     } catch (error) {
       console.log(error);
-      toastErrorNotify(`${url} can not be updated`);
     }
   };
 
