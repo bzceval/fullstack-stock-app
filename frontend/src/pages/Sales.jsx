@@ -46,7 +46,7 @@ const Sales = () => {
         open={open}
         setOpen={() => setOpen(false)}
       />
-      {!sales?.length && <NoDataAlert name={"firm"} />}
+      {!sales?.length && <NoDataAlert name={"sales"} />}
       {sales?.length > 0 && (
         <>
           <MultiSelect

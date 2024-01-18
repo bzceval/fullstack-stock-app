@@ -6,6 +6,7 @@ import useStockCalls from "../hooks/useStockCalls";
 import MultiSelect from "../components/MultiSelect";
 import PurchaseModal from "../components/modals/PurchaseModal";
 import PurchaseTable from "../components/tables/PurchasesTable";
+import NoDataAlert from "../helper/NoDataAlert";
 
 const Purchases = () => {
   const { purchases } = useSelector((state) => state.stock);
@@ -46,7 +47,7 @@ const Purchases = () => {
       >
         New Purchase
       </Button>
-
+      {!purchases?.length && <NoDataAlert name={"purchases"} />}
       {purchases?.length > 0 && (
         <>
           <MultiSelect
