@@ -15,6 +15,7 @@ const authSlice = createSlice({
       state.error = false;
     },
     LOGIN_SUCCESS: (state, { payload }) => {
+      console.log(payload);
       state.loading = false;
       state.currentUser = payload?.user?.username;
       state.isAdmin = payload?.user?.is_superuser;
