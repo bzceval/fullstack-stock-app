@@ -1,10 +1,11 @@
-import { Typography, Box, Grid, Alert, Button } from "@mui/material";
+import { Typography, Box, Grid, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import BrandCard from "../components/BrandCard";
 import BrandModal from "../components/modals/BrandModal";
 import useStockCalls from "../hooks/useStockCalls";
 import { flexCenter } from "../styles/globalStyles";
+import NoDataAlert from "../helper/NoDataAlert";
 
 const Brands = () => {
   const { getBrands } = useStockCalls();
@@ -34,11 +35,7 @@ const Brands = () => {
 
       <BrandModal open={open} setOpen={setOpen} info={info} setInfo={setInfo} />
 
-      {!loading && !brands?.length && (
-        <Alert severity="warning" sx={{ mt: 4, width: "50%" }}>
-          There is no brand to show
-        </Alert>
-      )}
+      {!loading && !brands?.length && <NoDataAlert name={"brands"} />}
 
       {brands?.length > 0 && (
         <Grid container sx={flexCenter} mt={4}>

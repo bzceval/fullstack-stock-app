@@ -6,6 +6,7 @@ import useStockCalls from "../hooks/useStockCalls";
 import SaleModal from "../components/modals/SaleModal";
 import SalesTable from "../components/tables/SalesTable";
 import MultiSelect from "../components/MultiSelect";
+import NoDataAlert from "../helper/NoDataAlert";
 
 const Sales = () => {
   const { sales } = useSelector((state) => state.stock);
@@ -45,7 +46,7 @@ const Sales = () => {
         open={open}
         setOpen={() => setOpen(false)}
       />
-
+      {!sales?.length && <NoDataAlert name={"firm"} />}
       {sales?.length > 0 && (
         <>
           <MultiSelect

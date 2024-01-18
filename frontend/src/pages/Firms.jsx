@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import FirmCard from "../components/FirmCard";
 import FirmModal from "../components/modals/FirmModal";
 import { flexCenter } from "../styles/globalStyles";
+import NoDataAlert from "../helper/NoDataAlert";
 
 // import axios from "axios";
 
@@ -61,7 +62,7 @@ const Firms = () => {
       </Button>
 
       <FirmModal open={open} setOpen={setOpen} info={info} setInfo={setInfo} />
-
+      {!firms?.length && <NoDataAlert name={"firm"} />}
       {firms?.length > 0 && (
         <Grid container sx={flexCenter} mt={3}>
           {firms?.map((firm) => (
