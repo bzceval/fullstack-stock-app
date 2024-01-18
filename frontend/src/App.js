@@ -1,8 +1,9 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { grey, blueGrey } from "@mui/material/colors";
 import AppRouter from "./router/AppRouter";
+import { grey, blueGrey } from "@mui/material/colors";
 import { Provider } from "react-redux";
-import store from "./redux/app/store";
+import store, { persistor } from "./redux/app/store"; 
+import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
   const theme = createTheme({
@@ -15,15 +16,16 @@ function App() {
       },
     },
   });
-
   return (
-    <div className="App">
+    <>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <AppRouter />
-        </Provider>
+          <PersistGate loading={null} persistor={persistor}>
+            <AppRouter />
+          </PersistGate>
+        </Provider> 
       </ThemeProvider>
-    </div>
+    </>
   );
 }
 
