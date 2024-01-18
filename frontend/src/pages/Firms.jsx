@@ -22,7 +22,7 @@ const Firms = () => {
   // const dispatch = useDispatch();
 
   // const { token } = useSelector((state) => state.auth);
-  // const BASE_URL = "";
+  // const BASE_URL = "localhost";
 
   // const getFirms = async () => {
   //   const url = "firms";
