@@ -24,20 +24,6 @@ const LoginForm = ({ values, handleChange, errors, touched, handleBlur }) => {
       <TextField
         margin="normal"
         fullWidth
-        label="User Name"
-        name="username"
-        id="userName"
-        type="text"
-        variant="outlined"
-        value={values.username}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        helperText={touched.username && errors.username}
-        error={touched.username && Boolean(errors.username)}
-      />
-      <TextField
-        margin="normal"
-        fullWidth
         id="email"
         label="Email Address"
         name="email"

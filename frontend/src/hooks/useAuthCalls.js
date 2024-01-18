@@ -13,10 +13,12 @@ const useAuthCalls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const login = async (userInfo) => {
+  const loginSuccess = async (userInfo) => {
     dispatch(FETCH_START());
     try {
+      console.log({ userInfo });
       const { data } = await axiosPublic.post("account/auth/login/", userInfo);
+      console.log({ data });
       dispatch(LOGIN_SUCCESS(data));
       navigate("/stock");
     } catch (err) {
@@ -24,7 +26,7 @@ const useAuthCalls = () => {
     }
   };
 
-  const logout = async () => {
+  const logoutSuccess = async () => {
     dispatch(FETCH_START());
     try {
       await axiosPublic.post("account/auth/logout/");
@@ -35,7 +37,7 @@ const useAuthCalls = () => {
     }
   };
 
-  const register = async (userInfo) => {
+  const registerSuccess = async (userInfo) => {
     dispatch(FETCH_START());
     try {
       const { data } = await axiosPublic.post("account/register/", userInfo);
@@ -47,9 +49,9 @@ const useAuthCalls = () => {
   };
 
   return {
-    login,
-    logout,
-    register,
+    loginSuccess,
+    logoutSuccess,
+    registerSuccess,
   };
 };
 
