@@ -1,0 +1,10 @@
+FROM node:19-slim
+
+WORKDIR /frontend
+
+COPY . .
+
+RUN yarn
+
+CMD yarn start
+EXPOSE 3000
